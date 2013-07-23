@@ -13,7 +13,7 @@ module Dayone
   #
 
   def self.create_post(post, options = {})
-    return unless Dayone.cli_installed? && post && post.length > 0
+    return unless Dayone.cli_installed? && post
 
     arguments = {
       :d => options[:date],
