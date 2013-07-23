@@ -30,8 +30,6 @@ module Tumblr
     if response.is_a?(Net::HTTPSuccess)
       post_hashes = JSON.parse(response.body.gsub("var tumblr_api_read = ", "")[0..-3])["posts"]
 
-      puts post_hashes
-
       post_hashes.map { |post_hash| Tumblr::Post.new(post_hash) }
     else
       puts "Failed to get posts, server returned #{response.code} #{response.message}"
