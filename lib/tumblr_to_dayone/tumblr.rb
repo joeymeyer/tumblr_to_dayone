@@ -17,7 +17,7 @@ module Tumblr
   # search - Search for posts with this query.
   #
 
-	def self.posts(title, password = nil, options = {})
+  def self.posts(title, password = nil, options = {})
     uri = URI.parse("http://#{title}.tumblr.com/api/read/json")
     uri.query = URI.encode_www_form(options)
 
