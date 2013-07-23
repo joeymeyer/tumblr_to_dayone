@@ -28,7 +28,7 @@ module Tumblr
     response = http.request(request)
 
     if response.is_a?(Net::HTTPSuccess)
-      post_hashes = JSON.parse(response.body.gsub("var tumblr_api_read = ", "")[0..-3])["posts"]
+      post_hashes = JSON.parse(response.body[22..-3])["posts"]
 
       post_hashes.map { |post_hash| Tumblr::Post.new(post_hash) }
     else
