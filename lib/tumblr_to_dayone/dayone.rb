@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module Dayone
 	
   def self.cli_installed?
@@ -13,7 +15,7 @@ module Dayone
   #
 
   def self.create_post(post, options = {})
-    return unless Dayone.cli_installed? && post
+    return false unless Dayone.cli_installed? && post
 
     arguments = {
       :d => options[:date],
@@ -21,8 +23,10 @@ module Dayone
       :p => options[:photo_path],
       :j => options[:journal_path]
     }.map { |k,v| "-#{k}=\"#{v}\"" unless !v }.compact.join(" ")
-
-    `echo #{post} | dayone #{arguments} new`
+    
+    output = `echo #{Shellwords.escape(post)} | dayone #{arguments} new`
+    
+    output.start_with?("New entry")
   end
 
 end
