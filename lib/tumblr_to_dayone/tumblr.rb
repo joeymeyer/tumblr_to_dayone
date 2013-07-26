@@ -11,8 +11,8 @@ module Tumblr
   # type   - The type of posts to return. If unspecified or empty, all types of posts are returned. Must be one of text, quote, photo, link, chat, video, or audio.
   # id     - A specific post ID to return. Use instead of start, num, or type.
   # filter - Alternate filter to run on the text content. Allowed values:
-  # text   - Plain text only. No HTML.
-  # none   - No post-processing. Output exactly what the author entered. (Note: Some authors write in Markdown, which will not be converted to HTML when this option is used.)
+  #            text: Plain text only. No HTML.
+  #            none: No post-processing. Output exactly what the author entered. (Note: Some authors write in Markdown, which will not be converted to HTML when this option is used.)
   # tagged - Return posts with this tag in reverse-chronological order (newest first). Optionally specify chrono=1 to sort in chronological order (oldest first).
   # search - Search for posts with this query.
   #
