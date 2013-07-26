@@ -32,10 +32,12 @@ module Tumblr
 
       post_hashes.map { |post_hash| Tumblr::Post.new(post_hash) }
     else
-      puts "Failed to get posts, server returned #{response.code} #{response.message}"
-
-      []
+      raise TumblrPostsAPIError, "Failed to get posts, server returned #{response.code} #{response.message}"
     end
   end
+
+end
+
+class TumblrPostsAPIError < StandardError
 
 end
