@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+gem 'tumblr_to_dayone'
+
+require 'tumblr_to_dayone/prompt'
+
+TumblrToDayone::Prompt.start
