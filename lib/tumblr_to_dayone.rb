@@ -26,10 +26,10 @@ module TumblrToDayone
 
           posts.each do |post|
             unless exited
-              post_status = options[:automatically_add_each_post] ? :yes : yield(post)
+              post_status = options[:automatically_add_each_post] ? :y : yield(post)
               
-              if post_status == :yes || post_status == :star
-                post_created = post.add_to_dayone!(starred = post_status == :star, dayone_journal = options[:journal_path])
+              if post_status == :y || post_status == :s
+                post_created = post.add_to_dayone!(starred = post_status == :s, dayone_journal = options[:journal_path])
 
                 puts "ERROR: There was a problem adding the post." unless post_created
               elsif post_status == :exit
