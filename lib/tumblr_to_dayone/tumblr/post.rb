@@ -24,6 +24,10 @@ module Tumblr
       ].compact.join("\n\n")
     end
 
+    def to_s
+      "Tumblr post created on #{self.created_at}\ntitle: #{self.title ? self.title : "<no title>"}\nphoto: #{!!self.photo_url}\nbody:\n#{self.full_body}\n"
+    end
+
     private
 
       PHOTO_URL_KEY_PREFIX = "photo-url-"

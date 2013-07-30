@@ -28,9 +28,18 @@ module Tumblr
     response = http.request(request)
 
     if response.is_a?(Net::HTTPSuccess)
-      post_hashes = JSON.parse(response.body[22..-3])["posts"]
+      body = JSON.parse(response.body[22..-3])
 
-      post_hashes.map { |post_hash| Tumblr::Post.new(post_hash) }
+      total_posts = body["posts-total"].to_i
+      post_hashes = body["posts"]
+
+      posts = post_hashes.map { |post_hash| Tumblr::Post.new(post_hash) }
+
+      if block_given?
+        yield posts, total_posts
+      else
+        posts
+      end
     else
       raise TumblrPostsAPIError, "Failed to get posts, server returned #{response.code} #{response.message}"
     end

@@ -4,6 +4,47 @@ require 'tumblr_to_dayone/dayone'
 
 module TumblrToDayone
 
+  #   options:
+  #
+  # password              - Password for blog (if there is one)
+  # filter                - Only get Tumblr posts based on filter
+  # ask_to_add_each_post  - Automatically add each Tumblr post or ask before adding each one (defaults to true)
+  # journal_path          - Location of Day One Journal file
+  #
+
+  def self.add_tumblr_posts_to_dayone(blog, options={})
+    begin
+      post_index = 0
+      no_more_posts = false
+
+      while !no_more_posts
+        Tumblr.posts(blog, password = options[:password], :start => post_index) do |posts, total_posts|
+          post_index += posts.count
+          no_more_posts = posts.empty? || post_index >= total_posts
+
+          exited = false
+
+          posts.each do |post|
+            unless exited
+              post_status = yield(post)
+              
+              if post_status == :yes || post_status == :star
+                post_created = post.add_to_dayone!(starred = post_status == :star, dayone_journal = options[:journal_path])
+
+                puts "ERROR: There was a problem adding the post." unless post_created
+              elsif post_status == :exit
+                exited = true
+                no_more_posts = true
+              end
+            end
+          end
+        end
+      end
+    rescue TumblrPostsAPIError => e
+      puts e.message
+    end
+  end
+
 end
 
 module Tumblr
