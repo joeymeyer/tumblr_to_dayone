@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = TumblrToDayone::VERSION
   spec.authors       = ["Joey Meyer"]
   spec.email         = ["jmeyer41@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Command prompt which makes it easy to add Tumblr posts to your Day One journal."
+  spec.summary       = "A simple command prompt that easily allows you to add posts from a Tumblr blog to your Day One journal." 
   spec.homepage      = ""
   spec.license       = "MIT"
 
