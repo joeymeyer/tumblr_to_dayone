@@ -1,29 +1,32 @@
-# TumblrToDayone
+# Tumblr to Day One
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'tumblr_to_dayone'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install tumblr_to_dayone
+A simple command prompt that easily allows you to add posts from a [Tumblr](http://tumblr.com) blog to your [Day One](http://dayoneapp.com) journal.
 
 ## Usage
 
-TODO: Write usage instructions here
+Get started by installing the gem:
 
-## Contributing
+    $ gem install tumblr_to_dayone
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+You will also need to install the [Day One CLI](http://dayoneapp.com/tools/).
+
+After that you are ready to go:
+
+    $ tumblr_to_dayone
+    
+This command starts a prompt and asks a few questions to get things setup:
+
+* Name of the blog
+* Password (if there is one)
+* Automatically add all posts – or choose which ones to add one by one
+* Path to your Day One journal (leave blank if it's the default path)
+
+After that it is ready to go and will start pulling down your Tumblr posts to either add one by one or all at once.
+
+## Creator
+
+[Joey Meyer](http://joeymeyer.com)
+
+## License
+
+tumblr_to_dayone is available under the MIT license. See the LICENSE file for more info.
