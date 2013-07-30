@@ -3,9 +3,9 @@ require 'reverse_markdown'
 
 module Tumblr
   class Post
-  	attr_accessor :type, :created_at, :title, :body, :photo_url, :video_player, :caption, :tags
-
-  	def initialize(post_hash)
+    attr_accessor :type, :created_at, :title, :body, :photo_url, :video_player, :caption, :tags
+    
+    def initialize(post_hash)
       self.type = post_hash["type"]
       self.created_at = Time.at(post_hash["unix-timestamp"] || Time.now.to_i)
       self.title = post_hash["regular-title"]
