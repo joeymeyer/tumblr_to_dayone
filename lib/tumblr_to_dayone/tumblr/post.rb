@@ -3,24 +3,26 @@ require 'reverse_markdown'
 
 module Tumblr
   class Post
-  	attr_accessor :type, :created_at, :title, :body, :photo_url, :photo_caption, :tags
+  	attr_accessor :type, :created_at, :title, :body, :photo_url, :video_player, :caption, :tags
 
   	def initialize(post_hash)
       self.type = post_hash["type"]
       self.created_at = Time.at(post_hash["unix-timestamp"] || Time.now.to_i)
       self.title = post_hash["regular-title"]
-      self.body = convert_to_markdown(post_hash["regular-body"])
+      self.body = convert_to_markdown(post_hash["regular-body"]) || link_markdown(post_hash["link-text"], post_hash["link-url"])
       self.photo_url = largest_photo_url(post_hash)
-      self.photo_caption = convert_to_markdown(post_hash["photo-caption"])
+      self.video_player = post_hash["video-player"]
+      self.caption = convert_to_markdown(post_hash["photo-caption"] || post_hash["video-caption"])
       self.tags = post_hash["tags"] || []
   	end
 
     def full_body
       [
         self.title ? "# #{self.title}" : nil,
+        self.video_player ? video_player : nil,
         self.body ? self.body : nil,
-        self.photo_caption ? self.photo_caption : nil,
-        self.tags ? self.tags.map {|tag| "\\##{tag}"}.join(" ") : nil
+        self.caption ? self.caption : nil,
+        self.tags && !self.tags.empty? ? self.tags.map {|tag| "\\##{tag}"}.join(" ") : nil
       ].compact.join("\n\n")
     end
 
@@ -42,6 +44,12 @@ module Tumblr
         return nil unless content
 
         ReverseMarkdown.parse(CGI.unescapeHTML(content))
+      end
+
+      def link_markdown(link_text, link_url)
+        return nil unless link_text && link_url
+
+        "[#{link_text}](#{link_url})"
       end
 
   end
