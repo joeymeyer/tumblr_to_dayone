@@ -19,6 +19,9 @@ module Tumblr
 
   def self.posts(title, password = nil, options = {})
     uri = URI.parse("http://#{title}.tumblr.com/api/read/json")
+    
+    options.delete_if { |k,v| v.nil? }
+
     uri.query = URI.encode_www_form(options)
 
     request = Net::HTTP::Get.new(uri.request_uri)
