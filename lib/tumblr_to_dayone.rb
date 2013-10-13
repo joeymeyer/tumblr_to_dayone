@@ -2,6 +2,7 @@ require "tumblr_to_dayone/version"
 require 'tumblr_to_dayone/tumblr'
 require 'tumblr_to_dayone/dayone'
 require 'tempfile'
+require 'open-uri'
 
 module TumblrToDayone
 
