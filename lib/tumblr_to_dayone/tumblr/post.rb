@@ -43,7 +43,7 @@ module Tumblr
       def convert_to_markdown(content)
         return nil unless content
 
-        ReverseMarkdown.parse(CGI.unescapeHTML(content))
+        ReverseMarkdown.convert(CGI.unescapeHTML(content))
       end
 
       def link_markdown(link_text, link_url)
